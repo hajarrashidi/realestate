@@ -6,11 +6,14 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using realestate.Data;
+using realestate.Models;
 
 namespace realestate
 {
@@ -32,6 +35,7 @@ namespace realestate
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "realestate", Version = "v1" });
             });
+            services.AddDbContext<RealestateContext>(options => options.UseSqlite("Data Source=realestate.db"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
